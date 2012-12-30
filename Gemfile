@@ -20,7 +20,6 @@ end
 
 group :development, :test do
   gem "guard"
-  gem "Platform", "~> 0.4.0"
   gem "open4", "~> 1.3.0"
   gem "popen4", "~> 0.1.2"
   gem 'rb-fsevent', '~> 0.9.2'
