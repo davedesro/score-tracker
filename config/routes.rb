@@ -1,5 +1,7 @@
 ScoreTracker::Application.routes.draw do
 
-  resources :users, only: [ :new ]
+  # root to: :home
+
+  resources :users, only: [ :new, :create ]
 
 end

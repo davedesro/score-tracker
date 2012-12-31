@@ -1,2 +1,8 @@
-=provide(:title, "Sign Up")
-Hi there
+= provide(:title, "Sign Up")
+= form_for @user do |f|
+  %h2.form-signin-heading="Sign Up"
+  = f.text_field :employee_id, placeholder: "Morse ID"
+  = f.text_field :name,        placeholder: "Name"
+  = f.text_field :tagline,     placeholder: "Tagline"
+  = f.submit "Create My Account", class: "btn btn-large btn-primary"
+
