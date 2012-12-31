@@ -14,19 +14,26 @@ describe UsersController do
 
     describe "with proper input" do
 
+      let(:create_user) do
+        post :create, user: {
+          employee_id: "1", name: "Bob", tagline: "best. player. ever.",
+          password: 'foobar', password_confirmation: 'foobar'
+        }
+      end
+
       it "returns http created" do
-        post :create, user: { employee_id: "1", name: "Bob", tagline: "best. player. ever." }
+        create_user
         response.status.should == 201
       end
 
       it "should create a user" do
         expect do
-          post :create, user: { employee_id: "1", name: "Bob", tagline: "best. player. ever." }
+          create_user
         end.to change(User, :count).by 1
       end
 
       it "should properly set the user attributes" do
-        post :create, user: { employee_id: "1", name: "Bob", tagline: "best. player. ever." }
+        create_user
         new_user = User.first
         new_user.employee_id = 1
         new_user.name        = "Bob"

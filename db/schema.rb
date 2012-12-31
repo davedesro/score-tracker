@@ -11,14 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121231183041) do
+ActiveRecord::Schema.define(:version => 20121231205702) do
 
   create_table "users", :force => true do |t|
     t.integer  "employee_id"
     t.string   "name"
     t.string   "tagline"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "password_digest"
   end
 
   add_index "users", ["employee_id"], :name => "index_users_on_employee_id", :unique => true
