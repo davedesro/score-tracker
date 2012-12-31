@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title="Score Tracker"
+    %title=title(yield(:title))
     =stylesheet_link_tag    "application", media: "all"
     =javascript_include_tag "application"
     =csrf_meta_tags
@@ -12,7 +12,7 @@
     %header.navbar.navbar-fixed-top.navbar-inverse
       .navbar-inner
         .container
-          =link_to "sample app", '#', id: "logo"
+          =link_to "Score Tracker", '#', id: "logo"
           %nav
             %ul.nav.pull-right
               %li=link_to "Home",    '#'
