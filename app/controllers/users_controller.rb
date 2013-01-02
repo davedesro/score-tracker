@@ -5,11 +5,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(params[:user])
-    if user.save
-      head :created
+    @user = User.new(params[:user])
+    if @user.save
+      redirect_to :new
     else
-      head :bad_request
+      render :new
     end
   end
 end

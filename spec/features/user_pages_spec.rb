@@ -4,6 +4,8 @@ describe "User Pages" do
 
   subject { page.body }
 
+  let(:signup) { "Create My Account" }
+
   describe "Sign Up Page" do
 
     before { visit new_user_path }
@@ -13,7 +15,13 @@ describe "User Pages" do
     describe "with incorrectly filled form" do
 
       it "should not add a new user" do
-        expect { click_button "Create My Account" }.not_to change(User, :count)
+        expect { click_button signup}.not_to change(User, :count)
+      end
+
+      it "should display the error message" do
+        click_button signup
+        page.should have_selector '.field_with_errors'
+        page.should have_selector '.help-inline', text: "ID can't be blank"
       end
     end
 
@@ -25,7 +33,7 @@ describe "User Pages" do
         fill_in :user_tagline,               with: "I'm kind of a big deal"
         fill_in :user_password,              with: "foobar"
         fill_in :user_password_confirmation, with: "foobar"
-        expect { click_button "Create My Account" }.to change(User, :count).by 1
+        expect { click_button signup }.to change(User, :count).by 1
       end
 
       # it "should redirect to home page with flash message" do
