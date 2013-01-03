@@ -18,10 +18,16 @@ describe "User Pages" do
         expect { click_button signup}.not_to change(User, :count)
       end
 
-      it "should display the error message" do
+      it "should display the error message of the field(s)" do
         click_button signup
         page.should have_selector '.field_with_errors'
         page.should have_selector '.help-inline', text: "ID can't be blank"
+      end
+
+      it "should let the user know there are errors" do
+        click_button signup
+        page.should have_selector '.alert'
+        page.should have_selector '.alert-error'
       end
     end
 
