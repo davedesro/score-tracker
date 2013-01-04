@@ -7,9 +7,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to :new
+      redirect_to :new_user
     else
-      render :new
+      render :new, status: 400
     end
   end
 end

@@ -1,12 +1,16 @@
 = provide(:title, "Sign Up")
 = # This currently creates a nice form, but an ugly error form
-= form_for @user, html: { class: 'form-signon controls controls-row span4' } do |f|
+= form_for @user, html: { class: 'form-signon span4' } do |f|
   %h2.form-signin-heading="Sign Up"
   = render 'shared/form_error_messages'
-  = f.text_field     :employee_id,           class: :span1, placeholder: "ID"
-  = f.text_field     :name,                  class: :span3, placeholder: "Name"
-  = f.text_field     :tagline,               class: :'input-block-level', placeholder: "Tagline"
-  = f.password_field :password,              class: :span2, placeholder: "Password"
-  = f.password_field :password_confirmation, class: :span2, placeholder: "Confirmation"
-  = f.submit "Create My Account", class: "btn btn-large btn-primary btn-block"
+  .controls.controls-row
+    = f.text_field     :employee_id,           class: :span1, bootstrap_friendly: true, placeholder: "ID"
+    = f.text_field     :name,                  class: :span3, bootstrap_friendly: true, placeholder: "Name"
+  .controls
+    = f.text_field     :tagline,               class: :span4, bootstrap_friendly: true, placeholder: "Tagline"
+  .controls.controls-row
+    = f.password_field :password,              class: :span2, bootstrap_friendly: true, placeholder: "Password"
+    = f.password_field :password_confirmation, class: :span2, bootstrap_friendly: true, placeholder: "Confirmation"
+  .controls
+    = f.submit "Create My Account", class: "btn btn-large btn-primary btn-block"
 

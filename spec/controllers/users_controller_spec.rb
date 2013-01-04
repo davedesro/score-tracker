@@ -23,7 +23,7 @@ describe UsersController do
 
       it "returns http created" do
         create_user
-        response.status.should == 201
+        response.should redirect_to new_user_url
       end
 
       it "should create a user" do

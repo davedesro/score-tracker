@@ -55,7 +55,6 @@ describe User do
     it "should require a password and password confirmation" do
       user = User.new
       user.should have(2).error_on :password
-      user.should have(1).error_on :password_confirmation
     end
 
     it "should have a password that is at least 6 characters" do
