@@ -23,7 +23,7 @@ describe UsersController do
 
       it "returns http created" do
         create_user
-        response.should redirect_to new_user_url
+        response.should redirect_to root_url
       end
 
       it "should create a user" do
@@ -38,6 +38,11 @@ describe UsersController do
         new_user.employee_id = 1
         new_user.name        = "Bob"
         new_user.tagline     = "best. player. ever."
+      end
+
+      it "should sign in the new user" do
+        subject.should_receive(:sign_in).once.with(instance_of User)
+        create_user
       end
     end
 

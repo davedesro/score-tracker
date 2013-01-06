@@ -1,0 +1,9 @@
+= provide(:title, "Sign In")
+= form_for :session, url: sessions_path, html: { class: 'form-signon span4' } do |f|
+  %h1="Sign In"
+  = f.text_field     :name,     class: :span4, placeholder: "Name"
+  = f.password_field :password, class: :span4, placeholder: "Password"
+  = f.submit "Log Me In", class: "btn btn-large btn-primary btn-block"
+  %p
+    ="New user?"
+    = link_to "Sign up now!", signup_path

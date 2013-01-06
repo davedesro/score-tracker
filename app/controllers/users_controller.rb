@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_filter :signed_in_user, only: :edit
+
   def new
     @user = User.new
   end
@@ -7,9 +9,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to :new_user
+      sign_in @user
+      flash[:success] = "Welcome to Score Tracker!"
+      redirect_to :root
     else
       render :new, status: 400
     end
+  end
+
+  def edit
   end
 end

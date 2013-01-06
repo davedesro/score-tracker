@@ -1,7 +1,7 @@
 = provide(:title, "Sign Up")
 = # This currently creates a nice form, but an ugly error form
 = form_for @user, html: { class: 'form-signon span4' } do |f|
-  %h2.form-signin-heading="Sign Up"
+  %h1="Sign Up"
   = render 'shared/form_error_messages'
   .controls.controls-row
     = f.text_field     :employee_id,           class: :span1, bootstrap_friendly: true, placeholder: "ID"

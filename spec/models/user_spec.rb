@@ -12,6 +12,7 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
+  it { should respond_to(:remember_token) }
 
   describe "validations" do
 
@@ -60,5 +61,10 @@ describe User do
     it "should have a password that is at least 6 characters" do
       User.new(password: 'a'*5).should have(1).error_on :password
     end
+  end
+
+  describe "remember token" do
+    before { @user.save }
+    its(:remember_token) { should_not be_blank }
   end
 end
