@@ -11,18 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130106162653) do
+ActiveRecord::Schema.define(:version => 20130107035111) do
 
   create_table "users", :force => true do |t|
     t.integer  "employee_id"
     t.string   "name"
     t.string   "tagline"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.string   "password_digest"
     t.string   "remember_token"
+    t.string   "google_id"
+    t.string   "google_token"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "google_hd"
+    t.string   "google_image_url"
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["employee_id"], :name => "index_users_on_employee_id", :unique => true
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"

@@ -16,8 +16,8 @@ describe UsersController do
 
       let(:create_user) do
         post :create, user: {
-          employee_id: "1", name: "Bob", tagline: "best. player. ever.",
-          password: 'foobar', password_confirmation: 'foobar'
+          employee_id: "1", name: "Bob", first_name: "Bob", tagline: "best. player. ever.",
+          password: 'foobar', password_confirmation: 'foobar', email: 'tom@example.com'
         }
       end
 

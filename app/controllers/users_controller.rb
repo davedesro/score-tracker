@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    params[:user][:first_name] = params[:user][:name] if params[:user].present?
     @user = User.new(params[:user])
     if @user.save
       sign_in @user

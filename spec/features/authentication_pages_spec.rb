@@ -43,7 +43,8 @@ describe "Authentication" do
         click_button signin
       end
 
-      it { should have_link(user.name.capitalize,     href: users_path(user))        }
+      it { should have_link(user.name.capitalize,     href: '#')        }
+      it { should have_link('Profile',    href: users_path(user))   }
       it { should have_link('Settings',    href: edit_user_path)   }
       it { should have_link('Sign out',    href: signout_path)     }
       it { should_not have_link('Sign in', href: signin_path)      }

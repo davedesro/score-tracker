@@ -5,5 +5,8 @@ FactoryGirl.define do
     tagline 'whatever, man'
     password 'foobarfoobar'
     password_confirmation 'foobarfoobar'
+    first_name 'dude'
+    last_name 'doctometrist'
+    email 'dude@example.com'
   end
 end

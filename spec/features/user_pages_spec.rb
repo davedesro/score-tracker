@@ -41,6 +41,7 @@ describe "User Pages" do
       it "should create a new user" do
         fill_in :user_employee_id,           with: "9"
         fill_in :user_name,                  with: "Example User"
+        fill_in :user_email,                 with: "user@example.com"
         fill_in :user_tagline,               with: "I'm kind of a big deal"
         fill_in :user_password,              with: "foobar"
         fill_in :user_password_confirmation, with: "foobar"
@@ -50,6 +51,7 @@ describe "User Pages" do
       it "should redirect to home page with flash message" do
         fill_in :user_employee_id, with: "9"
         fill_in :user_name,        with: "Example User"
+        fill_in :user_email,       with: "user@example.com"
         fill_in :user_tagline,     with: "I'm kind of a big deal"
         fill_in :user_password,              with: "foobar"
         fill_in :user_password_confirmation, with: "foobar"

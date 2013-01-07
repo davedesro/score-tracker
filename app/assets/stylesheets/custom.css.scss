@@ -20,3 +20,12 @@ input.error, input.error:focus {
   border: 1px solid $errorText;
 }
 input.error { color: $errorText; }
+
+
+.google-icon {
+  background-image: image-url('google_button.jpg');
+  width: 127px;
+  height: 31px;
+  margin-left: 17px;
+}
+.google-icon:hover { opacity: 0.9 }

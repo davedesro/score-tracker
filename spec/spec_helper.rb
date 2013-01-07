@@ -69,6 +69,8 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
+  config.extend VCR::RSpec::Macros
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -85,3 +87,12 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+OmniAuth.config.test_mode = true
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+  c.hook_into :fakeweb # or :webmock
+  c.ignore_localhost = true
+end
+
