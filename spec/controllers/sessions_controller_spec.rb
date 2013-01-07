@@ -18,8 +18,8 @@ describe SessionsController do
     end
 
     it "should log in the user with good credentials" do
-      FactoryGirl.create :user, name: 'dave', password: 'foobarfoobar'
-      post :create, session: { name: 'dave', password: 'foobarfoobar' }
+      FactoryGirl.create :user, email: 'dave@example.com', password: 'foobarfoobar'
+      post :create, session: { email: 'dave@example.com', password: 'foobarfoobar' }
       response.should redirect_to root_path
     end
   end

@@ -35,11 +35,11 @@ describe "Authentication" do
 
     describe "with valid information" do
 
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { FactoryGirl.create(:user, password: 'blabla', password_confirmation: 'blabla') }
 
       before do
-        fill_in "Name",     with: user.name
-        fill_in "Password", with: user.password
+        fill_in "Email",    with: user.email
+        fill_in "Password", with: 'blabla'
         click_button signin
       end
 
@@ -76,7 +76,7 @@ describe "Authentication" do
 
         before do
           visit edit_user_path
-          fill_in "Name",     with: user.name
+          fill_in "Email",    with: user.email
           fill_in "Password", with: user.password
           click_button signin
         end
