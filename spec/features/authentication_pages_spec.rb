@@ -2,67 +2,56 @@ require 'spec_helper'
 
 describe "Authentication" do
 
-  let(:signin) { "Log Me In" }
-
   subject { page.body }
 
-  describe "signin page" do
-
-    before { visit signin_path }
-
-    it { should have_selector('h1',    text: 'Sign In') }
-    it { should have_selector('title', text: 'Sign In') }
+  before do
+    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(
+      {
+        'uid'  => '12345',
+        'info' => {
+          'first_name' => 'Fixture First Name',
+          'last_name'  => 'Fixture Last Name',
+          'email'      => 'dude@example.com',
+          'image'      => 'https://fixture/google/profile/image/url.gif'
+        },
+        'extra' => {
+          'raw_info' => {
+            'hd' => 'example.com'
+          }
+        },
+        'credentials' => {
+          'token' => 'VALID_TOKEN'
+        }
+      }
+    )
+    visit '/auth/google_oauth2'
   end
 
-  describe "signin" do
+  describe "signin with valid information" do
 
-    before { visit signin_path }
-
-    describe "with invalid information" do
-
-      before { click_button signin }
-
-      it { should have_selector 'title', text: "Sign In" }
-      it { should have_selector('.alert.alert-error', text: 'Invalid') }
-
-      describe "after visiting another page" do
-
-        before { click_link "Home" }
-
-        it { should_not have_selector('.alert.alert-error') }
-      end
+    before do
+      @user = User.find_by_first_name('Fixture First Name')
     end
 
-    describe "with valid information" do
+    it { should have_link('Fixture first name',     href: '#')        }
+    it { should have_link('Profile',    href: user_path(@user))   }
+    it { should have_link('Settings',   href: edit_user_path)   }
+    it { should have_link('Sign out',   href: signout_path)     }
+    it { should_not have_link('Sign in') }
 
-      let(:user) { FactoryGirl.create(:user, password: 'blabla', password_confirmation: 'blabla') }
+    it "should redirect to root page" do
+      page.current_url.should == root_url
+    end
 
-      before do
-        fill_in "Email",    with: user.email
-        fill_in "Password", with: 'blabla'
-        click_button signin
-      end
+    describe "followed by signout" do
 
-      it { should have_link(user.name.capitalize,     href: '#')        }
-      it { should have_link('Profile',    href: users_path(user))   }
-      it { should have_link('Settings',    href: edit_user_path)   }
-      it { should have_link('Sign out',    href: signout_path)     }
-      it { should_not have_link('Sign in', href: signin_path)      }
+      before { click_link "Sign out" }
 
       it "should redirect to root page" do
         page.current_url.should == root_url
       end
 
-      describe "followed by signout" do
-
-        before { click_link "Sign out" }
-
-        it "should redirect to root page" do
-          page.current_url.should == root_url
-        end
-
-        it { should have_link("Sign in") }
-      end
+      it { should have_link("Sign in") }
     end
   end
 
@@ -75,10 +64,7 @@ describe "Authentication" do
       describe "when attempting to visit a protected page" do
 
         before do
-          visit edit_user_path
-          fill_in "Email",    with: user.email
-          fill_in "Password", with: user.password
-          click_button signin
+          visit edit_user_url
         end
 
         describe "after signing in" do

@@ -96,3 +96,7 @@ VCR.configure do |c|
   c.ignore_localhost = true
 end
 
+def login(user = FactoryGirl.create(:user))
+  controller.sign_in(user)
+  user
+end
