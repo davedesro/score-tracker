@@ -33,10 +33,11 @@ describe "Authentication" do
       @user = User.find_by_first_name('Fixture First Name')
     end
 
-    it { should have_link('Fixture first name',     href: '#')        }
-    it { should have_link('Profile',    href: user_path(@user))   }
-    it { should have_link('Settings',   href: edit_user_path)   }
-    it { should have_link('Sign out',   href: signout_path)     }
+    it { should have_link('Fixture first name', href: '#')  }
+    it { should have_link('Profile',            href: user_path(@user)) }
+    it { should have_link('Settings',           href: edit_user_path)   }
+    it { should have_link('Sign out',           href: signout_path)     }
+    it { should have_link('Create New Team',    href: new_team_path)    }
     it { should_not have_link('Sign in') }
 
     it "should redirect to root page" do
