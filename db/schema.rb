@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108043202) do
+ActiveRecord::Schema.define(:version => 20130110035723) do
+
+  create_table "teams", :force => true do |t|
+    t.integer  "user1_id"
+    t.integer  "user2_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "teams", ["user1_id"], :name => "index_teams_on_user1_id"
+  add_index "teams", ["user2_id"], :name => "index_teams_on_user2_id"
 
   create_table "users", :force => true do |t|
     t.string   "tagline"
