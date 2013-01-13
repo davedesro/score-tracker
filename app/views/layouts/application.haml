@@ -15,6 +15,8 @@
           =link_to "Score Tracker", '#', class: "brand"
           %nav
             %ul.nav.pull-right
+              - if signed_in?
+                %li=link_to "New Team", new_team_path
               %li=link_to "Home",     root_path
               %li= link_to "Help",    '#'
               - if signed_in?

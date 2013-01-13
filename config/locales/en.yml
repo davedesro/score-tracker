@@ -4,6 +4,6 @@
 en:
   activerecord:
     attributes:
-      user:
-        password_digest: "Password"
-        employee_id: "ID"
+      team:
+        user1_id: "First player"
+        user2_id: "Second player"

@@ -6,9 +6,9 @@ FactoryGirl.define do
 end
 
 FactoryGirl.define do
-  factory :team do
-    user1_id FactoryGirl.create(:user).id
-    user2_id FactoryGirl.create(:user).id
+  factory :team do |t|
+    t.association :player1, factory: :user
+    t.association :player2, factory: :user
   end
 end
 

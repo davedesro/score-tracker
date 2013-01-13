@@ -4,28 +4,7 @@ describe "Authentication" do
 
   subject { page.body }
 
-  before do
-    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(
-      {
-        'uid'  => '12345',
-        'info' => {
-          'first_name' => 'Fixture First Name',
-          'last_name'  => 'Fixture Last Name',
-          'email'      => 'dude@example.com',
-          'image'      => 'https://fixture/google/profile/image/url.gif'
-        },
-        'extra' => {
-          'raw_info' => {
-            'hd' => 'example.com'
-          }
-        },
-        'credentials' => {
-          'token' => 'VALID_TOKEN'
-        }
-      }
-    )
-    visit '/auth/google_oauth2'
-  end
+  before { integration_login }
 
   describe "signin with valid information" do
 
@@ -33,10 +12,11 @@ describe "Authentication" do
       @user = User.find_by_first_name('Fixture First Name')
     end
 
-    it { should have_link('Fixture first name',     href: '#')        }
-    it { should have_link('Profile',    href: user_path(@user))   }
-    it { should have_link('Settings',   href: edit_user_path)   }
-    it { should have_link('Sign out',   href: signout_path)     }
+    it { should have_link('Fixture first name', href: '#')  }
+    it { should have_link('Profile',            href: user_path(@user)) }
+    it { should have_link('Settings',           href: edit_user_path)   }
+    it { should have_link('Sign out',           href: signout_path)     }
+    it { should have_link('New Team',           href: new_team_path)    }
     it { should_not have_link('Sign in') }
 
     it "should redirect to root page" do

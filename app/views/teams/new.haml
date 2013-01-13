@@ -1,0 +1,13 @@
+= provide(:title, "New Team")
+= form_for @team, html: { class: 'st-form span4' } do |f|
+  %h1="New Team"
+  = render partial: 'shared/form_error_messages', locals: { object: @team }
+  - # to highlight the inputs as errors
+  - @team.errors.messages[:user1_email] = [true] if @team.errors.messages[:user1_id].present?
+  - @team.errors.messages[:user2_email] = [true] if @team.errors.messages[:user2_id].present?
+  .controls
+    = f.email_field :user1_email, class: :span4, placeholder: "First Player's Email"
+    = f.email_field :user2_email, class: :span4, placeholder: "Second Player's Email"
+    = f.text_field  :name,        class: :span4, placeholder: "Team Name"
+  .controls
+    = f.submit "Create Team", class: "btn btn-large btn-primary btn-block"

@@ -7,12 +7,10 @@ Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
-
 end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
-
 end
 
 # --- Instructions ---
@@ -43,9 +41,6 @@ end
 #
 # These instructions should self-destruct in 10 seconds.  If they don't, feel
 # free to delete them.
-
-
-
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
@@ -101,4 +96,31 @@ end
 def login(user = FactoryGirl.create(:user))
   controller.sign_in(user)
   user
+end
+
+def setup_google_omniauth
+  OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(
+    {
+      'uid'  => '12345',
+      'info' => {
+        'first_name' => 'Fixture First Name',
+        'last_name'  => 'Fixture Last Name',
+        'email'      => 'dude@example.com',
+        'image'      => 'https://fixture/google/profile/image/url.gif'
+      },
+      'extra' => {
+        'raw_info' => {
+          'hd' => 'example.com'
+        }
+      },
+      'credentials' => {
+        'token' => 'VALID_TOKEN'
+      }
+    }
+  )
+end
+
+def integration_login
+  setup_google_omniauth
+  visit '/auth/google_oauth2'
 end

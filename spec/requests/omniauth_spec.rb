@@ -12,27 +12,7 @@ describe "login from web" do
 
   context "with a valid omniauth response" do
 
-    before do
-      OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(
-        {
-          'uid'  => '12345',
-          'info' => {
-            'first_name' => 'Fixture First Name',
-            'last_name'  => 'Fixture Last Name',
-            'email'      => 'dude@example.com',
-            'image'      => 'https://fixture/google/profile/image/url.gif'
-          },
-          'extra' => {
-            'raw_info' => {
-              'hd' => 'example.com'
-            }
-          },
-          'credentials' => {
-            'token' => 'VALID_TOKEN'
-          }
-        }
-      )
-    end
+    before { setup_google_omniauth }
 
     it "should be redirect back or home" do
       get "/auth/google_oauth2", {}, "HTTP_REFERER" => "http://test.host/referrer"
